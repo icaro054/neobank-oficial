@@ -24,6 +24,8 @@
 **git clone "cole aqui a url do repositório"**
 *ele vai clonar o repositório em sua máquina*
 
+
+**cd neobank-ofical**
 **code .**
 *Vai abrir o VS Code direto no repositório*
 
