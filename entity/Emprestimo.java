@@ -1,6 +1,6 @@
 package entity;
 
-public class Emprestino {
+public class Emprestimo {
     private String id;
     private double valorTotal;
     private double taxaJuros;

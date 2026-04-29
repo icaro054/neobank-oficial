@@ -3,6 +3,7 @@ package entity;
 public class Cliente {
     private String nome;
     private String cpf;
+    private Endereco endereco; // ADICIONE ISSO
 
     public String getNome() {
         return nome;
@@ -18,5 +19,13 @@ public class Cliente {
 
     public void setCpf(String cpf) {
         this.cpf = cpf;
+    }
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
     }
 }

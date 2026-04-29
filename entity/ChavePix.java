@@ -9,7 +9,7 @@ public class ChavePix {
         return valorChave;
     }
 
-    public void setValorCHave (String valorChave) {
+    public void setValorChave (String valorChave) {
         this.valorChave = valorChave;
     }
 

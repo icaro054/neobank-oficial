@@ -5,6 +5,7 @@ public class Conta {
     private double saldo;
     private Cliente cliente;
     private TipoConta tipo;
+    private Agencia agencia; // NOVO CAMPO
 
     public String getNumero() { return numero; }
     public void setNumero(String numero) { this.numero = numero; }
@@ -17,4 +18,8 @@ public class Conta {
 
     public TipoConta getTipo() { return tipo; }
     public void setTipo(TipoConta tipo) { this.tipo = tipo; }
+
+    // GET/SET NOVOS
+    public Agencia getAgencia() { return agencia; }
+    public void setAgencia(Agencia agencia) { this.agencia = agencia; }
 }
