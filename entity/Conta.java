@@ -1,11 +1,11 @@
 package entity;
 
-public class Conta {
+public class Conta extends EntidadeBase {
     private String numero;
     private double saldo;
     private Cliente cliente;
     private TipoConta tipo;
-    private Agencia agencia; // NOVO CAMPO
+    private Agencia agencia;
 
     public String getNumero() { return numero; }
     public void setNumero(String numero) { this.numero = numero; }

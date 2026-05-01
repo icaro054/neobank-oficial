@@ -1,12 +1,13 @@
 package entity;
 
-public class Emprestimo {
+public class Emprestimo extends EntidadeBase {
     private String id;
     private double valorTotal;
     private double taxaJuros;
     private int numeroParcelas;
     private String dataInicio;
     private String dataFim;
+    private Cliente cliente;
     private Conta conta;
 
     public String getId() {
@@ -37,6 +38,10 @@ public class Emprestimo {
         return conta;
     }
 
+    public Cliente getCliente() {
+        return cliente;
+    }
+
     public void setId(String id) {
         this.id = id;
     }
@@ -63,5 +68,8 @@ public class Emprestimo {
 
     public void setConta(Conta conta) {
         this.conta = conta;
+    }
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 }

@@ -1,9 +1,10 @@
 package entity;
 
-public class ChavePix {
+public class ChavePix extends EntidadeBase {
     private String valorChave;
     private String tipoChave;
     private Conta conta;
+    private Cliente cliente;
 
     public String getValorChave() {
         return valorChave;
@@ -27,5 +28,11 @@ public class ChavePix {
 
     public void setConta(Conta conta) {
         this.conta = conta;
+    }
+    public Cliente getCliente() {
+        return cliente;
+    }
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 }

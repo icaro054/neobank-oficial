@@ -1,16 +1,12 @@
 package entity;
 
-public class Parcela {
-    private String id;
+public class Parcela extends EntidadeBase {
     private int numeroParcelas;
     private double valorParcela;
     private String dataVencimento;
     private boolean paga;
     private Fatura fatura;
 
-    public String getId() {
-        return id;
-    }
     public int getNumeroParcelas() {
         return numeroParcelas;
     }
@@ -27,9 +23,6 @@ public class Parcela {
         return fatura;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
     public void setNumeroParcelas(int numeroParcelas) {
         this.numeroParcelas = numeroParcelas;
     }

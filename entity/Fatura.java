@@ -1,16 +1,13 @@
 package entity;
 
-public class Fatura {
-    private String id;
+public class Fatura extends EntidadeBase {
     private double valor;
     private String descricao;
     private String dataVencimento;
     private boolean paga;
     private Cartao cartao;
+    private Cliente cliente;
 
-    public String getId() {
-        return id;
-    }
     public double getValor() {
         return valor;
     }
@@ -26,12 +23,16 @@ public class Fatura {
     public Cartao getCartao() {
         return cartao;
     }
-    public Fatura(String id, double valor, String descricao, String dataVencimento, Cartao cartao) {
-        this.id = id;
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public Fatura(double valor, String descricao, String dataVencimento, Cartao cartao, Cliente cliente) {
         this.valor = valor;
         this.descricao = descricao;
         this.dataVencimento = dataVencimento;
         this.cartao = cartao;
         this.paga = false;
+        this.cliente = cliente;
     }
 }

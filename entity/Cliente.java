@@ -1,6 +1,6 @@
 package entity;
 
-public class Cliente {
+public class Cliente extends EntidadeBase {
     private String nome;
     private String cpf;
     private Endereco endereco; // ADICIONE ISSO

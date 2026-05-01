@@ -1,6 +1,6 @@
 package entity;
 
-public class Cartao {
+public class Cartao extends EntidadeBase {
     private String numero;
     private String nomeTitular;
     private String Validade;
@@ -8,6 +8,7 @@ public class Cartao {
     private double limite;
     private String tipo;
     private Conta conta;
+    private Cliente cliente;
 
     public String getNumero() {
         return numero;
@@ -65,5 +66,11 @@ public class Cartao {
         this.conta = conta;
     }
 
-    
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
 }

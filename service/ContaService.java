@@ -1,10 +1,12 @@
 package service;
+
 import entity.Cliente;
 import entity.Conta;
 import entity.TipoConta;
 import exception.SaldoInsuficiente;
 import repository.ContaRepository;
-import util.GeradorConta;   
+import util.GeradorConta;
+
 public class ContaService {
     private ContaRepository repository = new ContaRepository();
 
@@ -20,13 +22,21 @@ public class ContaService {
     }
 
     public void depositar(Conta conta, double valor) {
+        if (valor <= 0) {
+            throw new IllegalArgumentException("Valor inválido! O depósito deve ser maior que zero.");
+        }
         conta.setSaldo(conta.getSaldo() + valor);
     }
 
     public void sacar(Conta conta, double valor) {
+        if (valor <= 0) {
+            throw new IllegalArgumentException("Valor inválido! O saque deve ser maior que zero.");
+        }
+        
         if (conta.getSaldo() < valor) {
             throw new SaldoInsuficiente("Saldo insuficiente para o saque!");
         }
+        
         conta.setSaldo(conta.getSaldo() - valor);
     }
 }
