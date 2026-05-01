@@ -3,7 +3,7 @@ package repository;
 import entity.Transacao;
 import java.util.ArrayList;
 import java.util.List;
-public class TransacaoRepository {
+public class TransacaoRepository extends GenericRepository<Transacao> {
     private List<Transacao> transacoes = new ArrayList<>();
 
     public void salvar(Transacao transacao) {

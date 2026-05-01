@@ -1,6 +1,5 @@
 package entity;
-
-public class Agencia {
+public class Agencia extends EntidadeBase {
     private String numero;
     private String nome;
 

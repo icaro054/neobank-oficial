@@ -1,163 +1,183 @@
-import entity.*;
+/* main desativado momentaneamente para ajustes nas classes de entidade (removendo id e ajustando construtores) 
+
+
+000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000import entity.*;
 import controller.*;
 import exception.SaldoInsuficiente;
 import java.util.*;
 
-public class Main {
+public class main {
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
+ 
+        System.out.println("   SISTEMA BANCÁRIO NEOBANK       ");
 
-        try {
-            System.out.println("=== SISTEMA BANCÁRIO NEOBANK ===\n");
+        ClienteController clienteController = new ClienteController();
+        ContaController contaController = new ContaController();
+        TransacaoController transacaoController = new TransacaoController();
 
-            // CONTROLLERS
-            ClienteController clienteController = new ClienteController();
-            ContaController contaController = new ContaController();
-            TransacaoController transacaoController = new TransacaoController();
+        System.out.print("Digite seu nome: ");
+        String nome = sc.nextLine();
 
-            // DADOS DO CLIENTE
-            System.out.print("Digite seu nome: ");
-            String nome = sc.nextLine();
+        System.out.print("Digite seu CPF: ");
+        String cpf = sc.nextLine();
 
-            System.out.print("Digite seu CPF: ");
-            String cpf = sc.nextLine();
+        Cliente cliente = clienteController.registrar(nome, cpf);
 
-            Cliente cliente = clienteController.registrar(nome, cpf);
+        Endereco endereco = new Endereco();
+        System.out.print("Rua: ");
+        endereco.setRua(sc.nextLine());
 
-            // ENDERECO
-            Endereco endereco = new Endereco();
+        System.out.print("Número: ");
+        endereco.setNumero(sc.nextInt());
+        sc.nextLine(); 
 
-            System.out.print("Rua: ");
-            endereco.setRua(sc.nextLine());
+        System.out.print("Bairro: ");
+        endereco.setBairro(sc.nextLine());
 
-            System.out.print("Número: ");
-            endereco.setNumero(sc.nextInt());
-            sc.nextLine();
+        System.out.print("Cidade: ");
+        endereco.setCidade(sc.nextLine());
 
-            System.out.print("Bairro: ");
-            endereco.setBairro(sc.nextLine());
+        System.out.print("Estado: ");
+        endereco.setEstado(sc.nextLine());
 
-            System.out.print("Cidade: ");
-            endereco.setCidade(sc.nextLine());
+        System.out.print("CEP (Somente números): ");
+        endereco.setCep(sc.nextInt());
+        sc.nextLine(); 
 
-            System.out.print("Estado: ");
-            endereco.setEstado(sc.nextLine());
+        cliente.setEndereco(endereco);
 
-            System.out.print("CEP: ");
-            endereco.setCep(sc.nextInt());
-            sc.nextLine();
+        Conta conta = contaController.criarConta(cliente, TipoConta.CORRENTE);
 
-            cliente.setEndereco(endereco);
+        Agencia agencia = new Agencia();
+        agencia.setNome("Agência Central");
+        agencia.setNumero("001");
+        conta.setAgencia(agencia);
 
-            // CONTA
-            Conta conta = contaController.criarConta(cliente, TipoConta.CORRENTE);
+        System.out.print("Digite sua chave PIX: ");
+        String chavePix = sc.nextLine();
 
-            // AGENCIA
-            Agencia agencia = new Agencia();
-            agencia.setNome("Agência Central");
-            agencia.setNumero("001");
-            conta.setAgencia(agencia);
+        ChavePix pix = new ChavePix();
+        pix.setValorChave(chavePix);
+        pix.setTipoChave("EMAIL");
+        pix.setConta(conta);
 
-            // PIX
-            System.out.print("Digite sua chave PIX: ");
-            String chavePix = sc.nextLine();
+        Cartao cartao = new Cartao();
+        cartao.setNumero("1234 5678 0000 9999");
+        cartao.setNomeTitular(cliente.getNome());
+        cartao.setValidade("12/30");
+        cartao.setCvv("123");
+        cartao.setLimite(3000);
+        cartao.setTipo("CREDITO");
+        cartao.setConta(conta);
 
-            ChavePix pix = new ChavePix();
-            pix.setValorChave(chavePix);
-            pix.setTipoChave("EMAIL");
-            pix.setConta(conta);
+        Fatura fatura = new Fatura(
+            "F001",
+            350.0,
+            "Compra Mercado",
+            "10/05/2026", 
+            cartao
+        );
 
-            // MENU DE OPERACOES
-            int opcao;
+        Parcela parcela = new Parcela();
+        parcela.setId("P001");
+        parcela.setNumeroParcelas(1);
+        parcela.setValorParcela(350.0);
+        parcela.setDataVencimento("10/05/2026"); 
+        parcela.setPaga(false);
+        parcela.setFatura(fatura);
 
-            do {
-                System.out.println("\n1 - Depositar");
-                System.out.println("2 - Sacar");
-                System.out.println("3 - Ver Extrato");
-                System.out.println("0 - Sair");
-                System.out.print("Escolha: ");
+        Emprestimo emprestimo = new Emprestimo();
+        emprestimo.setId("EMP001");
+        emprestimo.setValorTotal(5000);
+        emprestimo.setTaxaJuros(0.02);
+        emprestimo.setNumeroParcelas(12);
+        emprestimo.setDataInicio("01/04/2026"); 
+        emprestimo.setDataFim("01/04/2027"); 
+        emprestimo.setConta(conta);
+
+        int opcao = -1;
+
+        do {
+            System.out.println("\n MENU DE OPERAÇÕES ");
+            System.out.println("1 - Depositar");
+            System.out.println("2 - Sacar");
+            System.out.println("3 - Ver Extrato de Transações");
+            System.out.println("4 - Ver Resumo Completo da Conta (Produtos)");
+            System.out.println("0 - Sair");
+            System.out.print("Escolha: ");
+            
+            try {
                 opcao = sc.nextInt();
+                sc.nextLine(); 
 
                 switch (opcao) {
                     case 1:
-                        System.out.print("Valor depósito: ");
+                        System.out.print("Valor do depósito: R$ ");
                         double dep = sc.nextDouble();
+                        sc.nextLine(); // Limpa o buffer
                         contaController.depositar(conta, dep);
                         transacaoController.registrar(conta, dep, "DEPOSITO");
+                        System.out.println("Depósito realizado com sucesso!");
                         break;
 
                     case 2:
-                        System.out.print("Valor saque: ");
+                        System.out.print("Valor do saque: R$ ");
                         double saque = sc.nextDouble();
-                        contaController.sacar(conta, saque);
-                        transacaoController.registrar(conta, saque, "SAQUE");
+                        sc.nextLine(); // Limpa o buffer
+                        
+                        try {
+                            contaController.sacar(conta, saque);
+                            transacaoController.registrar(conta, saque, "SAQUE");
+                            System.out.println("Saque realizado com sucesso!");
+                        } catch (SaldoInsuficiente e) {
+                            System.out.println(" OPERAÇÃO NEGADA: " + e.getMessage());
+                        }
                         break;
 
                     case 3:
                         List<Transacao> extrato = transacaoController.exibirExtrato(conta.getNumero());
-                        System.out.println("\n=== EXTRATO ===");
-                        for (Transacao t : extrato) {
-                            System.out.println(t.getTipo() + " - R$" + t.getValor());
+                        System.out.println("\n EXTRATO BANCÁRIO ");
+                        if(extrato == null || extrato.isEmpty()){
+                             System.out.println("Nenhuma transação realizada.");
+                        } else {
+                            for (Transacao t : extrato) {
+                                System.out.println("[ " + t.getTipo() + " ] - R$ " + t.getValor());
+                            }
                         }
                         break;
+
+                    case 4:
+                        System.out.println("\n RESUMO DE PRODUTOS NEOBANK ");
+                        System.out.println("Cliente: " + cliente.getNome() + " (CPF: " + cliente.getCpf() + ")");
+                        System.out.println("Conta: " + conta.getNumero() + " | Agência: " + conta.getAgencia().getNumero());
+                        System.out.println("Saldo Atual: R$ " + conta.getSaldo());
+                        System.out.println("Chave PIX Ativa: " + pix.getValorChave());
+                        System.out.println("Cartão de Crédito final " + cartao.getNumero().substring(15) + " | Limite: R$ " + cartao.getLimite());
+                        System.out.println("Fatura Atual: R$ " + fatura.getValor() + " (Venc: " + fatura.getDataVencimento() + ")");
+                        System.out.println("Empréstimo Ativo: R$ " + emprestimo.getValorTotal() + " (12 parcelas)");
+                        break;
+
+                    case 0:
+                        System.out.println("\nEncerrando sistema... Obrigado por usar o NeoBank!");
+                        break;
+                        
+                    default:
+                        System.out.println("Opção inválida!");
+                        break;
                 }
+            } catch (InputMismatchException e) {
+                System.out.println("Erro: Por favor, digite um número válido.");
+                sc.nextLine();
+            } catch (Exception e) {
+                System.out.println("Erro inesperado: " + e.getMessage());
+            }
 
-            } while (opcao != 0);
+        } while (opcao != 0);
 
-            // CARTAO
-            Cartao cartao = new Cartao();
-            cartao.setNumero("1234 5678 0000 9999");
-            cartao.setNomeTitular(cliente.getNome());
-            cartao.setValidade("12/30");
-            cartao.setCvv("123");
-            cartao.setLimite(3000);
-            cartao.setTipo("CREDITO");
-            cartao.setConta(conta);
+        sc.close();
 
-            // FATURA
-            Fatura fatura = new Fatura(
-                "F001",
-                350.0,
-                "Compra Mercado",
-                "10/05/2026",
-                cartao
-            );
-
-            // PARCELA
-            Parcela parcela = new Parcela();
-            parcela.setId("P001");
-            parcela.setNumeroParcelas(1);
-            parcela.setValorParcela(350.0);
-            parcela.setDataVencimento("10/05/2026");
-            parcela.setPaga(false);
-            parcela.setFatura(fatura);
-
-            // EMPRESTIMO
-            Emprestimo emprestimo = new Emprestimo();
-            emprestimo.setId("EMP001");
-            emprestimo.setValorTotal(5000);
-            emprestimo.setTaxaJuros(0.02);
-            emprestimo.setNumeroParcelas(12);
-            emprestimo.setDataInicio("01/04/2026");
-            emprestimo.setDataFim("01/04/2027");
-            emprestimo.setConta(conta);
-
-            // RESUMO FINAL
-            System.out.println("\n=== RESUMO FINAL ===");
-            System.out.println("Cliente: " + cliente.getNome());
-            System.out.println("Conta: " + conta.getNumero());
-            System.out.println("Agência: " + conta.getAgencia().getNumero());
-            System.out.println("Saldo final: R$" + conta.getSaldo());
-            System.out.println("PIX: " + pix.getValorChave());
-            System.out.println("Cartão: " + cartao.getNumero());
-            System.out.println("Fatura: R$" + fatura.getValor());
-            System.out.println("Empréstimo: R$" + emprestimo.getValorTotal());
-
-        } catch (SaldoInsuficiente e) {
-            System.out.println("Erro: " + e.getMessage());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 }
+*/

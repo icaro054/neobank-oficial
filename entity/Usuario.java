@@ -1,7 +1,8 @@
 package entity;
 
-public class Usuario {
+public class Usuario extends EntidadeBase {
     private String email;
+    private String login;
     private String senha;
     private boolean ativo;
     private Cliente cliente;
@@ -39,6 +40,13 @@ public class Usuario {
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
+    public String getLogin() {
+        return login;
+    }
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
 
 
 }

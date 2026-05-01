@@ -1,15 +1,10 @@
 package entity;
 
-public class Transacao {
-    private String id;
+public class Transacao extends EntidadeBase {
     private double valor;
     private String dataHora;
     private String tipo;
     private Conta conta;
-
-    public String getId() {
-        return id;
-    }
 
     public String getDataHora() {
         return dataHora;
