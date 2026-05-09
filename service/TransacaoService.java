@@ -1,24 +1,55 @@
 package service;
 
-import entity.Transacao;
-import entity.Conta;
-import repository.TransacaoRepository;
 import java.util.List;
 
+import entity.Transacao;
+import repository.TransacaoRepository;
+
 public class TransacaoService {
+
     private TransacaoRepository repository = new TransacaoRepository();
 
-    public void registrarTransacao(Conta conta, double valor, String tipo) {
-        Transacao transacao = new Transacao();
+    public void criarTransacao(Transacao novaTransacao) {
+        
+      
+        if (novaTransacao.getValor() <= 0) {
+            throw new IllegalArgumentException("Erro: O valor da transação deve ser maior que zero.");
+        }
 
-        transacao.setValor(valor);
-        transacao.setTipo(tipo);
-        transacao.setConta(conta);
+        if (novaTransacao.getDataHora() == null || novaTransacao.getDataHora().trim().isEmpty()) {
+            throw new IllegalArgumentException("Erro: A data e hora da transação são obrigatórias.");
+        }
 
-        repository.salvar(transacao);
+        
+        if (novaTransacao.getTipo() == null || novaTransacao.getTipo().trim().isEmpty()) {
+            throw new IllegalArgumentException("Erro: O tipo da transação é obrigatório.");
+        }
+
+       
+        if (novaTransacao.getConta() == null) {
+            throw new IllegalArgumentException("Erro: A transação precisa estar vinculada a uma Conta.");
+        }
+
+        repository.salvar(novaTransacao);
     }
 
+    // Não esqueça de importar a biblioteca de Listas lá no topo do arquivo!
+    // import java.util.List;
+
     public List<Transacao> buscarPorConta(String numeroConta) {
-        return repository.buscarPorConta(numeroConta);
+        // Validação básica: tem que passar o número da conta para puxar o extrato
+        if (numeroConta == null || numeroConta.trim().isEmpty()) {
+            throw new IllegalArgumentException("Erro: Número da conta é obrigatório para buscar o extrato.");
+        }
+        
+        // Pede para a gaveta (Repositório) trazer todas as transações daquele número
+        List<Transacao> extrato = repository.buscarPorConta(numeroConta);
+        
+        // Se a lista voltar vazia, avisa o usuário
+        if (extrato == null || extrato.isEmpty()) {
+            throw new IllegalArgumentException("Nenhuma transação encontrada para a conta: " + numeroConta);
+        }
+        
+        return extrato;
     }
 }

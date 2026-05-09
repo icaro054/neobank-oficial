@@ -1,20 +1,20 @@
 package entity;
 
 public class Endereco extends EntidadeBase {
-    private int cep;
+    private String cep;
     private String rua;
-    private int numero;
+    private String numero;
     private String cidade;
     private String bairro;
     private String estado;
     private Cliente cliente;
     private Conta conta;
 
-    public int getCep() {
+    public String getCep() {
         return cep;
     }
 
-    public void setCep(int cep) {
+    public void setCep(String cep) {
         this.cep = cep;
     }
 
@@ -26,11 +26,11 @@ public class Endereco extends EntidadeBase {
         this.rua = rua;
     }
 
-    public int getNumero() {
+    public String getNumero() {
         return numero;
     }
 
-    public void setNumero(int numero) {
+    public void setNumero(String numero) {
         this.numero = numero;
     }
 
@@ -69,6 +69,6 @@ public class Endereco extends EntidadeBase {
     public void setConta(Conta conta) {
         this.conta = conta;
     }
-    
+
 
 }

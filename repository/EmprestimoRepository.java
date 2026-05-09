@@ -7,12 +7,12 @@ import java.util.List;
 public class EmprestimoRepository extends GenericRepository<Emprestimo> {
     
     // listar todos os empréstimos de um cliente específico
-    public List<Emprestimo> buscarPorCpfCliente(String cpf) {
+    public List<Emprestimo> buscarPorTipoCliente(String documento) {
         List<Emprestimo> emprestimosDoCliente = new ArrayList<>();
         
         for (Emprestimo e : dados) {
             // Supondo que seu Emprestimo tenha o Cliente associado
-            if (e.getCliente().getCpf().equals(cpf)) {
+            if (e.getCliente().getTipoCliente().equals(documento)) {
                 emprestimosDoCliente.add(e);
             }
         }
