@@ -7,19 +7,41 @@ public class Conta extends EntidadeBase {
     private TipoConta tipo;
     private Agencia agencia;
 
-    public String getNumero() { return numero; }
-    public void setNumero(String numero) { this.numero = numero; }
+    public String getNumero() {
+         return numero; 
+        }
 
-    public double getSaldo() { return saldo; }
-    public void setSaldo(double saldo) { this.saldo = saldo; }
+    public void setNumero(String numero) {
+         this.numero = numero; 
+        }
 
-    public Cliente getCliente() { return cliente; }
-    public void setCliente(Cliente cliente) { this.cliente = cliente; }
+    public double getSaldo() {
+         return saldo; 
+        }
+        
+    public void setSaldo(double saldo) {
+         this.saldo = saldo; 
+        }
 
-    public TipoConta getTipo() { return tipo; }
-    public void setTipo(TipoConta tipo) { this.tipo = tipo; }
+    public Cliente getCliente() {
+         return cliente; 
+        }
+    public void setCliente(Cliente cliente) {
+         this.cliente = cliente; 
+        }
 
-    // GET/SET NOVOS
-    public Agencia getAgencia() { return agencia; }
-    public void setAgencia(Agencia agencia) { this.agencia = agencia; }
+    public TipoConta getTipo() {
+         return tipo; 
+        }
+    public void setTipo(TipoConta tipo) {
+         this.tipo = tipo; 
+        }
+
+    
+    public Agencia getAgencia() {
+         return agencia; 
+        }
+    public void setAgencia(Agencia agencia) {
+         this.agencia = agencia; 
+        }
 }

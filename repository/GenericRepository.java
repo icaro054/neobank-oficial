@@ -11,7 +11,7 @@ public abstract class GenericRepository <T extends EntidadeBase> {
     public void salvar(T entidade) {
         dados.add(entidade);
     }
-    // aqui inicia a busca universal para qualquer tipo de entidade
+    // busca universal para qualquer tipo de entidade
     public T buscarPor(String id) {
         for (T item : dados) {
             if (item.getId().equals(id)) {

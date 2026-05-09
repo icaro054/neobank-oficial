@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 public class ChavePixRepository extends GenericRepository<ChavePix> {
     // listar todas as chaves Pix de um cliente específico
-    public List<ChavePix> buscarPorCpfCliente(String cpf) {
+    public List<ChavePix> buscarPorTipoCliente(String documento) {
         List<ChavePix> chavesDoCliente = new ArrayList<>();
         
         for (ChavePix c : dados) {
             // Supondo que sua ChavePix tenha o Cliente associado
-            if (c.getCliente().getCpf().equals(cpf)) {
+            if (c.getCliente().getTipoCliente().equals(documento)) {
                 chavesDoCliente.add(c);
             }
         }
